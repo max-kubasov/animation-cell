@@ -24,7 +24,12 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+           
+        setupNavBar()
+        
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+     
+        setupTableView()
         
         fetchData()
     }
@@ -53,6 +58,28 @@ class ViewController: UITableViewController {
                 print("Error decoding JSON: \(error)")
             }
         }.resume()
+    }
+    
+    func setupNavBar() {
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        view.addSubview(navBar)
+
+        let navItem = UINavigationItem(title: "SomeTitle")
+
+        navBar.setItems([navItem], animated: false)
+    }
+    
+    func setupTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Add constraints to position the table view below the navigation bar
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
