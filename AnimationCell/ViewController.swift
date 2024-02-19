@@ -23,8 +23,6 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.register(YourCustomTableViewCell.self, forCellReuseIdentifier: "YourCustomCellIdentifier")
         
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
         
@@ -60,26 +58,12 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data?.items.count ?? 0
     }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-//        if indexPath.row % 2 == 0 {
-//            cell.backgroundColor = .darkGray
-//        } else {
-//            cell.backgroundColor = .lightGray
-//        }
-        
-//        if let item = data?.items[indexPath.row] {
-//            cell.backgroundColor = UIColor(hex: item.color)
-//        }
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
 
         if let item = data?.items[indexPath.row] {
             cell.nameLabel.text = item.name
-//            cell.colorView.backgroundColor = UIColor(hex: item.color)
             cell.customRectangleView.backgroundColor = UIColor(hex: item.color)
 
             if let imageUrl = item.image {
@@ -100,7 +84,6 @@ class ViewController: UITableViewController {
                         print("Error load image")
                     }
                 }
-//                cell.itemImageView.load(url: URL(string: fullImageUrl)!)
             }
         }
 
@@ -109,22 +92,6 @@ class ViewController: UITableViewController {
 
 }
 
-
-
-//extension UIImageView {
-//    func load(url: URL) {
-//        DispatchQueue.global().async { [weak self] in
-//            if let data = try? Data(contentsOf: url) {
-//                if let image = UIImage(data: data) {
-//                    DispatchQueue.main.async {
-//                        self?.image = image
-//                        print("!!!!!!!!!------------00000000000000")
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
 
 extension UIColor {
     convenience init(hex: String) {
