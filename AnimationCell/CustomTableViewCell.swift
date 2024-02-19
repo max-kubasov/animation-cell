@@ -33,6 +33,7 @@ class CustomTableViewCell: UITableViewCell {
         label.textColor = UIColor.white // Set your desired text color
         // Set your text for the label
         label.text = "Your Label Text"
+        label.font = UIFont.systemFont(ofSize: 27)
         return label
     }()
 
@@ -54,14 +55,14 @@ class CustomTableViewCell: UITableViewCell {
             customRectangleView.heightAnchor.constraint(equalToConstant: 100),
             
             // Image view constraints
-            itemImageView.topAnchor.constraint(equalTo: customRectangleView.topAnchor, constant: 10),
-            itemImageView.leadingAnchor.constraint(equalTo: customRectangleView.leadingAnchor, constant: 10),
-            itemImageView.bottomAnchor.constraint(equalTo: customRectangleView.bottomAnchor, constant: -10),
-            itemImageView.widthAnchor.constraint(equalToConstant: 50), // Set your desired width
+            itemImageView.topAnchor.constraint(equalTo: customRectangleView.topAnchor, constant: 5),
+            itemImageView.trailingAnchor.constraint(equalTo: customRectangleView.trailingAnchor, constant: -5),
+            itemImageView.bottomAnchor.constraint(equalTo: customRectangleView.bottomAnchor, constant: -5),
+            itemImageView.widthAnchor.constraint(equalToConstant: 90), // Set your desired width
             
             // Label constraints
             nameLabel.centerYAnchor.constraint(equalTo: customRectangleView.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10)
+            nameLabel.leadingAnchor.constraint(equalTo: customRectangleView.leadingAnchor, constant: 30)
         ])
     }
     
