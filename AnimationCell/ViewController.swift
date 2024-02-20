@@ -3,7 +3,10 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController {
+    
+    var tableView: UITableView!
+    var navBar: UINavigationBar!
 
     struct Item: Codable {
         let id: String
@@ -24,12 +27,11 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-           
         setupNavBar()
         
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
-     
         setupTableView()
+        
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
         
         fetchData()
     }
@@ -61,20 +63,39 @@ class ViewController: UITableViewController {
     }
     
     func setupNavBar() {
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        
+        navBar.backgroundColor = .red
+        
         view.addSubview(navBar)
 
         let navItem = UINavigationItem(title: "SomeTitle")
-
+        
         navBar.setItems([navItem], animated: false)
+        
+        navBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        
     }
     
     func setupTableView() {
+        
+        tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        view.addSubview(tableView)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         // Add constraints to position the table view below the navigation bar
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            tableView.topAnchor.constraint(equalTo: navBar.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -82,17 +103,22 @@ class ViewController: UITableViewController {
         
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+}
+
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data?.items.count ?? 0
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
-
+        
         if let item = data?.items[indexPath.row] {
             cell.nameLabel.text = item.name
             cell.customRectangleView.backgroundColor = UIColor(hex: item.color)
-
+            
             if let imageUrl = item.image {
                 let fullImageUrl = "https://test-task-server.mediolanum.f17y.com" + imageUrl
                 print("FULL IMAGE URL ------ \(fullImageUrl)")
@@ -113,12 +139,12 @@ class ViewController: UITableViewController {
                 }
             }
         }
-
+        
         return cell
     }
 
-}
 
+}
 
 extension UIColor {
     convenience init(hex: String) {
