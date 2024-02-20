@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         
         let customBarButtonItem = UIBarButtonItem(customView: customButton)
            
-//        let updateButton = UIBarButtonItem(image: UIImage(named: "arrow.triangle.2.circlepath"), style: .done, target: self, action: #selector (updateFruit))
+        let updateButton = UIBarButtonItem(image: UIImage(named: "arrow.triangle.2.circlepath"), style: .done, target: self, action: #selector (updateFruit))
         
         navItem.rightBarButtonItem = customBarButtonItem
         
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     }
     
     @objc func updateFruit() {
-        
+        print("Update Fruit")
     }
 
 }
