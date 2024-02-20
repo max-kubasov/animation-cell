@@ -64,15 +64,30 @@ class ViewController: UIViewController {
     
     func setupNavBar() {
         navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
-        
         navBar.backgroundColor = .red
-        
         view.addSubview(navBar)
-
         let navItem = UINavigationItem(title: "SomeTitle")
         
-        navBar.setItems([navItem], animated: false)
+        // Create custom button
+        let customButton = UIButton(type: .system)
+        let customImage = UIImage(systemName: "arrow.triangle.2.circlepath")
+        customButton.setImage(customImage, for: .normal)
+        customButton.tintColor = .white
         
+        
+        customButton.translatesAutoresizingMaskIntoConstraints = false
+        customButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        customButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        customButton.addTarget(self, action: #selector(updateFruit), for: .touchUpInside)
+        
+        let customBarButtonItem = UIBarButtonItem(customView: customButton)
+           
+//        let updateButton = UIBarButtonItem(image: UIImage(named: "arrow.triangle.2.circlepath"), style: .done, target: self, action: #selector (updateFruit))
+        
+        navItem.rightBarButtonItem = customBarButtonItem
+        
+        navBar.setItems([navItem], animated: false)
         navBar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -100,6 +115,10 @@ class ViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+    }
+    
+    @objc func updateFruit() {
         
     }
 
