@@ -7,6 +7,9 @@ class ViewController: UIViewController {
     
     var tableView: UITableView!
     var navBar: UINavigationBar!
+    let imageView = UIImageView()
+    let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+    var isAnimationRunning = true
 
     struct Item: Codable {
         let id: String
@@ -31,9 +34,9 @@ class ViewController: UIViewController {
         
         setupTableView()
         
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        setupImageLoader()
         
-        fetchData()
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
 
     func fetchData() {
@@ -120,7 +123,55 @@ class ViewController: UIViewController {
     
     @objc func updateFruit() {
         print("Update Fruit")
+        stopAnimation()
+        fetchData()
     }
+    
+    func setupImageLoader() {
+        
+        if let image = UIImage(named: "loader") {
+            imageView.image = image
+        }
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(imageView)
+        
+        rotateImage()
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            imageView.widthAnchor.constraint(equalToConstant: 50),
+            imageView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    func rotateImage() {
+        rotationAnimation.fromValue = 0
+        rotationAnimation.toValue = Float.pi * 2
+        rotationAnimation.repeatCount = .infinity
+        rotationAnimation.duration = 1.0
+
+        // Apply the animation to the image view's layer
+        imageView.layer.add(rotationAnimation, forKey: "rotationAnimation")
+    }
+    
+    func startAnimation() {
+        imageView.layer.add(rotationAnimation, forKey: "rotationAnimation")
+        print("START ANIMATION")
+        isAnimationRunning = true
+        
+    }
+
+    func stopAnimation() {
+        imageView.layer.removeAnimation(forKey: "rotationAnimation")
+        print("STOP ANIMATION")
+        imageView.isHidden = true
+        isAnimationRunning = false
+    }
+    
+    
 
 }
 
