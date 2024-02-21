@@ -54,7 +54,7 @@ class ViewController: UIViewController {
                 
                 print("ARRAY(ITEMS)-----------\(self.array)")
                 
-                print("DATA(ApiResponse)-------------\(self.data)")
+                print("DATA(ApiResponse)-------------\(self.data!)")
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -85,8 +85,6 @@ class ViewController: UIViewController {
         customButton.addTarget(self, action: #selector(updateFruit), for: .touchUpInside)
         
         let customBarButtonItem = UIBarButtonItem(customView: customButton)
-           
-        let updateButton = UIBarButtonItem(image: UIImage(named: "arrow.triangle.2.circlepath"), style: .done, target: self, action: #selector (updateFruit))
         
         navItem.rightBarButtonItem = customBarButtonItem
         
@@ -123,7 +121,9 @@ class ViewController: UIViewController {
     
     @objc func updateFruit() {
         print("Update Fruit")
-        stopAnimation()
+        isAnimationRunning ? stopAnimation() : startAnimation()
+
+        sleep(2)
         fetchData()
     }
     
@@ -160,6 +160,7 @@ class ViewController: UIViewController {
     func startAnimation() {
         imageView.layer.add(rotationAnimation, forKey: "rotationAnimation")
         print("START ANIMATION")
+        //imageView.isHidden = false
         isAnimationRunning = true
         
     }
