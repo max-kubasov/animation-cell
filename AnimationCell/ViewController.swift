@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     let imageView = UIImageView()
     let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
     var isAnimationRunning = true
+    var emptyStateLabel = UILabel()
 
     struct Item: Codable {
         let id: String
@@ -36,8 +37,6 @@ class ViewController: UIViewController {
         
         setupImageLoader()
         
-        //fetchData()
-        
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
 
@@ -62,10 +61,10 @@ class ViewController: UIViewController {
                     self.tableView.reloadData()
                 }
                 
-                self.stopAnimation()
                 
             } catch {
                 print("Error decoding JSON: \(error)")
+                self.errorReceiveData()
             }
         }.resume()
     }
@@ -130,14 +129,23 @@ class ViewController: UIViewController {
         array.removeAll()
         data = nil
         
+        DispatchQueue.main.async {
+            self.emptyStateLabel.text = ""
+        }
+        
+        
         startAnimation()
         
         print("ARRAY--------------\(array)")
         print("2222222------------\(data?.items.count)")
         
-        tableView.reloadData()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.fetchData()
             self.stopAnimation()
         }
@@ -190,7 +198,24 @@ class ViewController: UIViewController {
         isAnimationRunning = false
     }
     
-    
+    func errorReceiveData() {
+        print("----------ERROR--------------")
+        DispatchQueue.main.async {
+            if self.array.isEmpty {
+                // Create a custom view for the empty state
+                self.emptyStateLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: self.tableView.frame.height))
+                self.emptyStateLabel.text = "No items to display"
+                self.emptyStateLabel.textAlignment = .center
+                self.emptyStateLabel.textColor = .gray
+                
+                // Set the custom view as the background view of the table view
+                self.tableView.backgroundView = self.emptyStateLabel
+            } else {
+                // If there are items, remove the background view
+                self.tableView.backgroundView = nil
+            }
+        }
+    }
 
 }
 
