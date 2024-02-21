@@ -36,6 +36,8 @@ class ViewController: UIViewController {
         
         setupImageLoader()
         
+        //fetchData()
+        
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
 
@@ -59,6 +61,9 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                
+                self.stopAnimation()
+                
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -121,10 +126,23 @@ class ViewController: UIViewController {
     
     @objc func updateFruit() {
         print("Update Fruit")
-        isAnimationRunning ? stopAnimation() : startAnimation()
 
-        sleep(2)
-        fetchData()
+        array.removeAll()
+        data = nil
+        
+        startAnimation()
+        
+        print("ARRAY--------------\(array)")
+        print("2222222------------\(data?.items.count)")
+        
+        tableView.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.fetchData()
+            self.stopAnimation()
+        }
+        
+        
     }
     
     func setupImageLoader() {
@@ -160,7 +178,7 @@ class ViewController: UIViewController {
     func startAnimation() {
         imageView.layer.add(rotationAnimation, forKey: "rotationAnimation")
         print("START ANIMATION")
-        //imageView.isHidden = false
+        imageView.isHidden = false
         isAnimationRunning = true
         
     }
