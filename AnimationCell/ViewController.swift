@@ -126,13 +126,22 @@ class ViewController: UIViewController {
     @objc func updateFruit() {
         print("Update Fruit")
 
-        array.removeAll()
-        data = nil
+        
+        DispatchQueue.main.async {
+            self.array.removeAll()
+            self.data = nil
+            self.tableView.reloadData()
+        }
+        
         
         DispatchQueue.main.async {
             self.emptyStateLabel.text = ""
         }
         
+        
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
         
         startAnimation()
         
@@ -140,9 +149,7 @@ class ViewController: UIViewController {
         print("2222222------------\(data?.items.count)")
         
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -244,13 +251,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                             cell.itemImageView.image = image
                         }
                         
-                        
                         print("ShowImage")
-                    } else {
+                        print("IMAGE ------- \(image)")
                         
+                    } else {
                         print("Error load image")
                     }
                 }
+            } else {
+                DispatchQueue.main.async {
+                    cell.itemImageView.image = nil
+                }
+                print("------------Image is empty------------")
             }
         }
         
