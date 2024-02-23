@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
     var isAnimationRunning = true
     var emptyStateLabel = UILabel()
+    var navItem = UINavigationItem(title: "SomeTitle")
 
     struct Item: Codable {
         let id: String
@@ -59,7 +60,10 @@ class ViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.navItem.title = self.data?.title
                 }
+                
+                
                 
                 
             } catch {
@@ -73,7 +77,7 @@ class ViewController: UIViewController {
         navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         navBar.backgroundColor = .red
         view.addSubview(navBar)
-        let navItem = UINavigationItem(title: "SomeTitle")
+        
         
         // Create custom button
         let customButton = UIButton(type: .system)
@@ -149,6 +153,7 @@ class ViewController: UIViewController {
         print("2222222------------\(data?.items.count)")
         
         
+        
 
         
         
@@ -214,6 +219,8 @@ class ViewController: UIViewController {
                 self.emptyStateLabel.text = "No items to display"
                 self.emptyStateLabel.textAlignment = .center
                 self.emptyStateLabel.textColor = .gray
+                
+                self.navItem.title = ""
                 
                 // Set the custom view as the background view of the table view
                 self.tableView.backgroundView = self.emptyStateLabel
