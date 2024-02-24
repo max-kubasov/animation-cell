@@ -61,6 +61,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.navItem.title = self.data?.title
+                    self.animateTableCells()
                 }
                 
                 
@@ -135,33 +136,24 @@ class ViewController: UIViewController {
             self.array.removeAll()
             self.data = nil
             self.tableView.reloadData()
-        }
-        
-        
-        DispatchQueue.main.async {
             self.emptyStateLabel.text = ""
         }
         
         
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-        
         startAnimation()
         
-        print("ARRAY--------------\(array)")
-        print("2222222------------\(data?.items.count)")
+        print("ARRAY----Empty----------\(array)")
+        print("2222222----Empty--------\(data?.items.count)")
         
         
         
 
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.fetchData()
             self.stopAnimation()
         }
-        
         
     }
     
@@ -243,6 +235,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
         
+        
+        
         if let item = data?.items[indexPath.row] {
             cell.nameLabel.text = item.name
             cell.customRectangleView.backgroundColor = UIColor(hex: item.color)
@@ -251,16 +245,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 let fullImageUrl = "https://test-task-server.mediolanum.f17y.com" + imageUrl
                 print("FULL IMAGE URL ------ \(fullImageUrl)")
                 ImageLoaderManager.shared.loadImage(from: URL(string: fullImageUrl)!) { image in
-                    
+
                     if let image = image {
-                        
+
                         DispatchQueue.main.async {
                             cell.itemImageView.image = image
                         }
-                        
+
                         print("ShowImage")
                         print("IMAGE ------- \(image)")
-                        
+
                     } else {
                         print("Error load image")
                     }
@@ -276,6 +270,22 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+
+    
+    func animateTableCells() {
+        tableView.reloadData() // Reload data before animation
+        
+        print("!!!!!!!!!!ANIMATION CELL-----------------")
+        
+        let cells = tableView.visibleCells
+        
+        for (index, cell) in cells.enumerated() {
+            cell.transform = CGAffineTransform(translationX: 0, y: -tableView.bounds.height) // Move cell offscreen
+            UIView.animate(withDuration: 0.5, delay: 0.2 * Double(index), options: [.curveEaseInOut], animations: {
+                cell.transform = CGAffineTransform(translationX: 0, y: 0) // Animate cell back to its original position
+            }, completion: nil)
+        }
+    }
 
 }
 
