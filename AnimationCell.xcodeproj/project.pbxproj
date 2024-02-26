@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50254EB02B8CBAF600BC7DD7 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50254EAF2B8CBAF600BC7DD7 /* MoreInfoViewController.swift */; };
 		50B7BD252B54033900117B6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B7BD242B54033900117B6E /* AppDelegate.swift */; };
 		50B7BD272B54033900117B6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B7BD262B54033900117B6E /* SceneDelegate.swift */; };
 		50B7BD292B54033900117B6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B7BD282B54033900117B6E /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		50254EAF2B8CBAF600BC7DD7 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		50B7BD212B54033900117B6E /* AnimationCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimationCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B7BD242B54033900117B6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B7BD262B54033900117B6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				50B7BD242B54033900117B6E /* AppDelegate.swift */,
 				50B7BD262B54033900117B6E /* SceneDelegate.swift */,
 				50B7BD282B54033900117B6E /* ViewController.swift */,
+				50254EAF2B8CBAF600BC7DD7 /* MoreInfoViewController.swift */,
 				50B7BD3E2B55607100117B6E /* CustomTableViewCell.swift */,
 				50B7BD3A2B554AA500117B6E /* LoadManager.swift */,
 				50B7BD2A2B54033900117B6E /* Main.storyboard */,
@@ -147,6 +150,7 @@
 				50B7BD292B54033900117B6E /* ViewController.swift in Sources */,
 				50B7BD3F2B55607100117B6E /* CustomTableViewCell.swift in Sources */,
 				50B7BD252B54033900117B6E /* AppDelegate.swift in Sources */,
+				50254EB02B8CBAF600BC7DD7 /* MoreInfoViewController.swift in Sources */,
 				50B7BD272B54033900117B6E /* SceneDelegate.swift in Sources */,
 				50B7BD3B2B554AA500117B6E /* LoadManager.swift in Sources */,
 			);

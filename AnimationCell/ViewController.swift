@@ -272,7 +272,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)")
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let newVC = MoreInfoViewController()
+        
+        let navigationController = UINavigationController(rootViewController: newVC)
+        
+        present(navigationController, animated: true, completion: nil)
+    }
     
     func animateTableCells() {
         tableView.reloadData() // Reload data before animation
