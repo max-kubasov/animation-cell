@@ -150,7 +150,7 @@ class ViewController: UIViewController {
 
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.fetchData()
             self.stopAnimation()
         }
@@ -235,11 +235,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
         
+        cell.itemImageView.image = nil
         
         
         if let item = data?.items[indexPath.row] {
             cell.nameLabel.text = item.name
             cell.customRectangleView.backgroundColor = UIColor(hex: item.color)
+            
             
             if let imageUrl = item.image {
                 let fullImageUrl = "https://test-task-server.mediolanum.f17y.com" + imageUrl
