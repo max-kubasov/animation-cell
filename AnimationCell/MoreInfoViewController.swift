@@ -11,10 +11,15 @@ class MoreInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "More Info VC"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
 
-        view.backgroundColor = .red
+        view.backgroundColor = .white
     }
     
-
+    @objc func backButtonTapped() {
+        navigationController?.dismiss(animated: true)
+    }
     
 }

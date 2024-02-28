@@ -281,6 +281,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let navigationController = UINavigationController(rootViewController: newVC)
         
+        navigationController.modalPresentationStyle = .fullScreen
+        
         present(navigationController, animated: true, completion: nil)
     }
     
