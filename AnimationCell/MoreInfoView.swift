@@ -8,6 +8,20 @@
 import UIKit
 
 class MoreInfoView: UIView {
+    
+    var labelText: String? {
+        didSet {
+            label.text = labelText
+        }
+    }
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "121212"
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -40,10 +54,7 @@ class MoreInfoView: UIView {
         containerView.addSubview(imageView)
         
         // Create UILabel
-        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Name Fruit or Vegetables"
-        label.textAlignment = .center
         containerView.addSubview(label)
         
         // Constraints for imageView

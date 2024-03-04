@@ -275,9 +275,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)")
         
+        guard let selectedItem = data?.items[indexPath.row] else { return }
+        
+        print("\(selectedItem.name)")
+        print("\(selectedItem.image)")
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         let newVC = MoreInfoViewController()
+        newVC.labelText = selectedItem.name
         
         let navigationController = UINavigationController(rootViewController: newVC)
         

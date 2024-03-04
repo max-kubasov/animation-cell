@@ -8,11 +8,14 @@
 import UIKit
 
 class MoreInfoViewController: UIViewController {
+    
+    var labelText: String?
+    var imageUrl: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "More Info VC"
+        title = labelText
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
         
         navigationController?.navigationBar.backgroundColor = .red
@@ -21,8 +24,10 @@ class MoreInfoViewController: UIViewController {
         
         let customView = MoreInfoView()
         customView.translatesAutoresizingMaskIntoConstraints = false
-        
+        customView.labelText = labelText
         view.addSubview(customView)
+        
+        
         
         NSLayoutConstraint.activate([
             customView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
