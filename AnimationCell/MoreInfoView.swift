@@ -22,6 +22,14 @@ class MoreInfoView: UIView {
         return label
     }()
     
+    private var text: UILabel = {
+        let text = UILabel()
+        text.textAlignment = .center
+        text.numberOfLines = 0
+        text.text = "Sample text Sample text Sample text Sample text Sample text"
+        return text
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -64,6 +72,15 @@ class MoreInfoView: UIView {
         // Constraints for label
         label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
+        
+        // Create and set constraints for text
+        text.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(text)
+        //text.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        text.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
+        text.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
+        text.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
+    
     }
 }
 

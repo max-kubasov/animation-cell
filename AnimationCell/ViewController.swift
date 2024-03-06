@@ -278,7 +278,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard let selectedItem = data?.items[indexPath.row] else { return }
         
         print("\(selectedItem.name)")
-        print("\(selectedItem.image)")
+        //print("\(selectedItem.image)")
         
         tableView.deselectRow(at: indexPath, animated: true)
         
