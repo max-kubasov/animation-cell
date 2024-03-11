@@ -15,6 +15,12 @@ class MoreInfoView: UIView {
         }
     }
     
+    var labelMoreText: String? {
+        didSet {
+            text.text = labelMoreText
+        }
+    }
+    
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center

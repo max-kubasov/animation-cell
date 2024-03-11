@@ -285,6 +285,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let newVC = MoreInfoViewController()
         newVC.labelText = selectedItem.name
         newVC.id = selectedItem.id
+        newVC.text = "123 Sample 456 Sample 789 Sample 000 Sample"
         
         let navigationController = UINavigationController(rootViewController: newVC)
         
