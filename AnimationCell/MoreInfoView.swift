@@ -75,9 +75,14 @@ class MoreInfoView: UIView {
         
         // Create UIImageView
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+//        imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+//        imageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        imageView.widthAnchor.constraint(lessThanOrEqualToConstant: 150).isActive = true
+        imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 150).isActive = true
+        // Aspect ratio constraint to maintain image aspect ratio
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1.0).isActive = true
         containerView.addSubview(imageView)
+        
         
         // Create UILabel
         label.translatesAutoresizingMaskIntoConstraints = false

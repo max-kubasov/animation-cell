@@ -64,7 +64,7 @@ class MoreInfoViewController: UIViewController {
             customView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            customView.heightAnchor.constraint(equalToConstant: 200) // Set your desired height
+            customView.heightAnchor.constraint(equalToConstant: 350) // Set your desired height
         ])
     }
     

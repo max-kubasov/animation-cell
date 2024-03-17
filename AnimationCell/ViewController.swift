@@ -285,10 +285,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let image = cell.itemImageView.image {
             selectedImage = image
-            print("IMAGE 11111 --------- \(selectedImage)")
+            print("Show selected Image")
         } else {
             selectedImage = nil
-            print("No image (((((((((")
+            print("No image. Image equel nil")
         }
         
         
@@ -298,10 +298,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard let selectedItem = data?.items[indexPath.row] else { return }
         
         print("\(selectedItem.name)")
-        print("\(selectedItem.image) ----------- IMAGE --------")
-        
-        
-        
         
         
         tableView.deselectRow(at: indexPath, animated: true)
