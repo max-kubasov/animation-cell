@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     var isAnimationRunning = true
     var emptyStateLabel = UILabel()
     var navItem = UINavigationItem(title: "SomeTitle")
+    var selectedImageURL: URL?
+    var selectedImage: UIImage?
+
 
     struct Item: Codable {
         let id: String
@@ -246,6 +249,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             if let imageUrl = item.image {
                 let fullImageUrl = "https://test-task-server.mediolanum.f17y.com" + imageUrl
                 print("FULL IMAGE URL ------ \(fullImageUrl)")
+                selectedImageURL = URL(string: fullImageUrl)
                 ImageLoaderManager.shared.loadImage(from: URL(string: fullImageUrl)!) { image in
 
                     if let image = image {
@@ -253,6 +257,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.async {
                             cell.itemImageView.image = image
                         }
+                        
+                        self.selectedImage = image
 
                         print("ShowImage")
                         print("IMAGE ------- \(image)")
@@ -275,10 +281,28 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)")
         
+        guard let cell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell else { return }
+        
+        if let image = cell.itemImageView.image {
+            selectedImage = image
+            print("IMAGE 11111 --------- \(selectedImage)")
+        } else {
+            selectedImage = nil
+            print("No image (((((((((")
+        }
+        
+        
+
+        
+        
         guard let selectedItem = data?.items[indexPath.row] else { return }
         
         print("\(selectedItem.name)")
-        //print("\(selectedItem.image)")
+        print("\(selectedItem.image) ----------- IMAGE --------")
+        
+        
+        
+        
         
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -286,6 +310,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         newVC.labelText = selectedItem.name
         newVC.id = selectedItem.id
         newVC.text = "123 Sample 456 Sample 789 Sample 000 Sample"
+        
+        if let image = selectedImage {
+            newVC.image = image
+        }
+        
         
         let navigationController = UINavigationController(rootViewController: newVC)
         

@@ -14,6 +14,7 @@ class MoreInfoViewController: UIViewController {
     var id: String?
     var text: String?
     let customView = MoreInfoView()
+    var image = UIImage()
     
     struct Item: Codable {
         let id: String
@@ -96,6 +97,7 @@ class MoreInfoViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.customView.labelText = self.labelText
                     self.customView.labelMoreText = self.text
+                    self.customView.setImageForMoreInfoCell = self.image
                 }
 
                 

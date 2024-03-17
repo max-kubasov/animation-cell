@@ -21,6 +21,12 @@ class MoreInfoView: UIView {
         }
     }
     
+    var setImageForMoreInfoCell: UIImage? {
+        didSet {
+            imageView.image = setImageForMoreInfoCell
+        }
+    }
+    
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -34,6 +40,11 @@ class MoreInfoView: UIView {
         text.numberOfLines = 0
         text.text = "Sample text Sample text Sample text Sample text Sample text"
         return text
+    }()
+    
+    private var imageView: UIImageView = {
+        let image = UIImageView(image: UIImage(systemName: "paperplane.circle.fill"))
+        return image
     }()
     
     override init(frame: CGRect) {
@@ -63,8 +74,9 @@ class MoreInfoView: UIView {
         containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         // Create UIImageView
-        let imageView = UIImageView(image: UIImage(named: "yourImageName")) // Set your image here
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         containerView.addSubview(imageView)
         
         // Create UILabel
@@ -82,10 +94,10 @@ class MoreInfoView: UIView {
         // Create and set constraints for text
         text.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(text)
-        //text.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         text.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
         text.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
         text.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
+        
     
     }
 }
