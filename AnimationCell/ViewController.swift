@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var navItem = UINavigationItem(title: "SomeTitle")
     var selectedImageURL: URL?
     var selectedImage: UIImage?
+    var selectedColor: String?
 
 
     struct Item: Codable {
@@ -292,10 +293,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         
-
-        
-        
         guard let selectedItem = data?.items[indexPath.row] else { return }
+        
+        selectedColor = selectedItem.color
         
         print("\(selectedItem.name)")
         
@@ -307,8 +307,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         newVC.id = selectedItem.id
         newVC.text = "123 Sample 456 Sample 789 Sample 000 Sample"
         
+        
         if let image = selectedImage {
             newVC.image = image
+        }
+        
+        if let color = selectedColor {
+            newVC.color = color
         }
         
         

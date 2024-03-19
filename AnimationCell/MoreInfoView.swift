@@ -27,10 +27,17 @@ class MoreInfoView: UIView {
         }
     }
     
+    var setBackgroundColor: UIColor? {
+        didSet {
+            containerView.backgroundColor = setBackgroundColor
+        }
+    }
+    
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "121212"
+        label.textColor = .white
         return label
     }()
     
@@ -38,6 +45,7 @@ class MoreInfoView: UIView {
         let text = UILabel()
         text.textAlignment = .center
         text.numberOfLines = 0
+        text.textColor = .white
         text.text = "Sample text Sample text Sample text Sample text Sample text"
         return text
     }()
@@ -45,6 +53,13 @@ class MoreInfoView: UIView {
     private var imageView: UIImageView = {
         let image = UIImageView(image: UIImage(systemName: "paperplane.circle.fill"))
         return image
+    }()
+    
+    private var containerView: UIView = {
+        let containerView = UIView()
+        // Add background color to the containerView
+        containerView.backgroundColor = UIColor(hex: "FF0000")
+        return containerView
     }()
     
     override init(frame: CGRect) {
@@ -59,13 +74,12 @@ class MoreInfoView: UIView {
     
     private func setupViews() {
         // Create UIView to contain image and text
-        let containerView = UIView()
+        
         containerView.layer.cornerRadius = 20
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
         
-        // Add background color to the containerView
-        containerView.backgroundColor = UIColor.lightGray
+
         
         // Constraints for containerView to fill the CustomView
         containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -84,24 +98,26 @@ class MoreInfoView: UIView {
         containerView.addSubview(imageView)
         
         
-        // Create UILabel
-        label.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(label)
+
         
         // Constraints for imageView
         imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
         
-        // Constraints for label
-        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
+        
+//        // Create UILabel
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addSubview(label)
+//        // Constraints for label
+//        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+//        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
         
         // Create and set constraints for text
         text.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(text)
         text.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
         text.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
-        text.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
+        text.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
         
     
     }

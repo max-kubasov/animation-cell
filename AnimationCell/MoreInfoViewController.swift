@@ -15,6 +15,7 @@ class MoreInfoViewController: UIViewController {
     var text: String?
     let customView = MoreInfoView()
     var image = UIImage()
+    var color: String?
     
     struct Item: Codable {
         let id: String
@@ -98,6 +99,8 @@ class MoreInfoViewController: UIViewController {
                     self.customView.labelText = self.labelText
                     self.customView.labelMoreText = self.text
                     self.customView.setImageForMoreInfoCell = self.image
+                    //print("COLOR --------- \(UIColor(hex: self.color!))")
+                    self.customView.setBackgroundColor = UIColor(hex: self.color!)
                 }
 
                 

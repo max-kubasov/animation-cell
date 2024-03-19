@@ -36,6 +36,7 @@ class CustomTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 27)
         return label
     }()
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
