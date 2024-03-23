@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
     var isAnimationRunning = true
     var emptyStateLabel = UILabel()
-    var navItem = UINavigationItem(title: "SomeTitle")
+    var navItem = UINavigationItem(title: "")
     var selectedImageURL: URL?
     var selectedImage: UIImage?
     var selectedColor: String?
@@ -38,6 +38,8 @@ class ViewController: UIViewController {
         
         setupNavBar()
         
+        navItem.title = "Fruit and Berry"
+        
         setupTableView()
         
         setupImageLoader()
@@ -63,9 +65,16 @@ class ViewController: UIViewController {
                 print("DATA(ApiResponse)-------------\(self.data!)")
                 
                 DispatchQueue.main.async {
+                    
                     self.tableView.reloadData()
                     self.navItem.title = self.data?.title
+                    
+                    
+                    print("01010101010101 ----- \(self.navItem.title)")
+                    print("01010101010101 ----- \(self.data?.title)")
+                    
                     self.animateTableCells()
+                    
                 }
                 
                 
@@ -134,10 +143,10 @@ class ViewController: UIViewController {
     
     @objc func updateFruit() {
         print("Update Fruit")
-
         
         DispatchQueue.main.async {
             self.array.removeAll()
+            self.navItem.title = "..."
             self.data = nil
             self.tableView.reloadData()
             self.emptyStateLabel.text = ""
@@ -147,8 +156,6 @@ class ViewController: UIViewController {
         startAnimation()
         
         print("ARRAY----Empty----------\(array)")
-        print("2222222----Empty--------\(data?.items.count)")
-        
         
         
 
